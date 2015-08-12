@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# JAVIERTV - XBMC Add-on by J (j@gmail.com)
+# PalcoTV - XBMC Add-on by Juarrox (juarrox@gmail.com)
 # Version 0.2.99 (17.10.2014)
 #------------------------------------------------------------
 # License: GPL (http://www.gnu.org/licenses/gpl-3.0.html)
@@ -43,11 +43,11 @@ from resources.tools.new_regex import *
 
 
 
-home = xbmc.translatePath(os.path.join('special://home/addons/plugin.video.javiertv/', ''))
-tools = xbmc.translatePath(os.path.join('special://home/addons/plugin.video.javiertv/resources/tools', ''))
+home = xbmc.translatePath(os.path.join('special://home/addons/plugin.video.palcotv/', ''))
+tools = xbmc.translatePath(os.path.join('special://home/addons/plugin.video.palcotv/resources/tools', ''))
 addons = xbmc.translatePath(os.path.join('special://home/addons/', ''))
-art = xbmc.translatePath(os.path.join('special://home/addons/plugin.video.javiertv/art', ''))
-tmp = xbmc.translatePath(os.path.join('special://home/addons/plugin.video.javiertv/tmp', ''))
+art = xbmc.translatePath(os.path.join('special://home/addons/plugin.video.palcotv/art', ''))
+tmp = xbmc.translatePath(os.path.join('special://home/addons/plugin.video.palcotv/tmp', ''))
 playlists = xbmc.translatePath(os.path.join('special://home/addons/playlists', ''))
 
 icon = art + 'icon.png'
@@ -57,7 +57,7 @@ fanart = 'fanart.jpg'
 # Entry point
 def run():
 
-    plugintools.log("---> javierTV.run <---")
+    plugintools.log("---> palcoTV.run <---")
     
     # Obteniendo parámetros...
     params = plugintools.get_params() 
@@ -81,9 +81,9 @@ def run():
 # Main menu
 
 def main_list(params):
-    plugintools.log("[JavierTV-0.3.0].main_list "+repr(params))
+    plugintools.log("[PalcoTV-0.3.0].main_list "+repr(params))
    
-    # Control del skin de JavierTV
+    # Control del skin de PalcoTV
     mastermenu = xml_skin()
     plugintools.log("XML menu: "+mastermenu)
     try:
@@ -91,7 +91,7 @@ def main_list(params):
     except:
         mastermenu = 'http://pastebin.com/raw.php?i=bjCUnJjG'
         data = plugintools.read(mastermenu)
-        xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % ('JavierTV', "XML no reconocido...", 3 , art+'icon.png'))    
+        xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % ('PalcoTV', "XML no reconocido...", 3 , art+'icon.png'))    
 
     matches = plugintools.find_multiple_matches(data,'<menu_info>(.*?)</menu_info>')
     for entry in matches:
@@ -139,10 +139,10 @@ def main_list(params):
                
 
 def play(params):
-    plugintools.log("[JavierTV-0.3.0].play "+repr(params))
+    plugintools.log("[PalcoTV-0.3.0].play "+repr(params))
     # plugintools.direct_play(params.get("url"))
     # xbmc.Player(xbmc.PLAYER_CORE_AUTO).play(params.get("url"))
-    plugintools.log("[JavierTV 0.2.85]: Playing file...")
+    plugintools.log("[PalcoTV 0.2.85]: Playing file...")
     url = params.get("url")
 
     # Notificación de inicio de resolver en caso de enlace RTMP
@@ -177,7 +177,7 @@ def runPlugin(url):
 
 
 def live_items_withlink(params):
-    plugintools.log("[JavierTV-0.3.0].live_items_withlink "+repr(params))
+    plugintools.log("[PalcoTV-0.3.0].live_items_withlink "+repr(params))
     data = plugintools.read(params.get("url"))
 
     # ToDo: Agregar función lectura de cabecera (fanart, thumbnail, título, últ. actualización)
@@ -203,7 +203,7 @@ def live_items_withlink(params):
 
   
 def xml_lists(params):
-    plugintools.log("[JavierTV-0.3.0].xml_lists "+repr(params))
+    plugintools.log("[PalcoTV-0.3.0].xml_lists "+repr(params))
     data = plugintools.read( params.get("url") )
     name_channel = params.get("title")
     name_channel = parser_title(name_channel)
@@ -235,7 +235,7 @@ def xml_lists(params):
 
             
 def getstreams_now(params):
-    plugintools.log("[JavierTV-0.3.0].getstreams_now "+repr(params))
+    plugintools.log("[PalcoTV-0.3.0].getstreams_now "+repr(params))
     
     data = plugintools.read( params.get("url") )
     poster = plugintools.find_single_match(data, '<poster>(.*?)</poster>')
@@ -282,7 +282,7 @@ def livestreams_channels(params):
    
         
 def livestreams_subchannels(params):
-    plugintools.log("[JavierTV-0.3.0].livestreams_subchannels "+repr(params))
+    plugintools.log("[PalcoTV-0.3.0].livestreams_subchannels "+repr(params))
 
     data = plugintools.read( params.get("url") )
     # title_channel = params.get("title")
@@ -300,7 +300,7 @@ def livestreams_subchannels(params):
 
 # Pendiente de cargar thumbnail personalizado y fanart...
 def livestreams_subitems(params):
-    plugintools.log("[JavierTV-0.3.0].livestreams_subitems "+repr(params))
+    plugintools.log("[PalcoTV-0.3.0].livestreams_subitems "+repr(params))
 
     title_subchannel = params.get("title")
     data = plugintools.read( params.get("url") )
@@ -317,7 +317,7 @@ def livestreams_subitems(params):
 
 
 def livestreams_items(params):
-    plugintools.log("[JavierTV-0.3.0].livestreams_items "+repr(params))
+    plugintools.log("[PalcoTV-0.3.0].livestreams_items "+repr(params))
 
     title_subchannel = params.get("title")
     plugintools.log("title= "+title_subchannel)    
@@ -351,7 +351,7 @@ def livestreams_items(params):
 
 
 def xml_items(params):
-    plugintools.log("[JavierTV-0.3.0].xml_items "+repr(params))
+    plugintools.log("[PalcoTV-0.3.0].xml_items "+repr(params))
     data = plugintools.read( params.get("url") )
     thumbnail = params.get("thumbnail")
 
@@ -374,7 +374,7 @@ def xml_items(params):
 
              
 def simpletv_items(params):
-    plugintools.log("[JavierTV-0.3.0].simpletv_items "+repr(params))
+    plugintools.log("[PalcoTV-0.3.0].simpletv_items "+repr(params))
 
     # Obtenemos fanart y thumbnail del diccionario
     thumbnail = params.get("thumbnail")
@@ -1152,7 +1152,7 @@ def simpletv_items(params):
 
            
 def myplaylists_m3u(params):  # Mis listas M3U
-    plugintools.log("[JavierTV-0.3.0].myplaylists_m3u "+repr(params))
+    plugintools.log("[PalcoTV-0.3.0].myplaylists_m3u "+repr(params))
     thumbnail = params.get("thumbnail")
     plugintools.add_item(action="play" , title = "[COLOR red][B][Tutorial][/B][COLOR lightyellow]: Importar listas M3U a mi biblioteca [/COLOR][COLOR blue][I][Youtube][/I][/COLOR]" , thumbnail = art + "icon.png" , url = "plugin://plugin.video.youtube/?path=/root/video&action=play_video&videoid=8i0KouM-4-U" , folder = False , isPlayable = True )
     plugintools.add_item(action="search_channel" , title = "[B][COLOR lightyellow]Buscador de canales[/COLOR][/B][COLOR lightblue][I] Nuevo![/I][/COLOR]" , thumbnail = art + "search.png" , fanart = art + 'fanart.jpg' , folder = True , isPlayable = False )
@@ -1211,14 +1211,14 @@ def myplaylists_m3u(params):  # Mis listas M3U
                 
 
 def playlists_m3u(params):  # Biblioteca online
-    plugintools.log("[Javiertv-0.3.0].playlists_m3u "+repr(params))
+    plugintools.log("[PalcoTV-0.3.0].playlists_m3u "+repr(params))
     data = plugintools.read( params.get("url") )
     name_channel = params.get("plot")
     pattern = '<name>'+name_channel+'(.*?)</channel>'
     data = plugintools.find_single_match(data, pattern)
     online = '[COLOR yellowgreen][I][Auto][/I][/COLOR]'
     params["ext"] = 'm3u'
-    plugintools.add_item( action="" , title='[B][COLOR yellow]'+name_channel+'[/B][/COLOR] - [B][I][COLOR lightyellow]j@gmail.com [/COLOR][/B][/I]' , thumbnail= art + 'icon.png' , folder = False , isPlayable = False )    
+    plugintools.add_item( action="" , title='[B][COLOR yellow]'+name_channel+'[/B][/COLOR] - [B][I][COLOR lightyellow]juarrox@gmail.com [/COLOR][/B][/I]' , thumbnail= art + 'icon.png' , folder = False , isPlayable = False )    
     subchannel = re.compile('<subchannel>([^<]+)<name>([^<]+)</name>([^<]+)<thumbnail>([^<]+)</thumbnail>([^<]+)<url>([^<]+)</url>([^<]+)</subchannel>').findall(data)
     # Sustituir por una lista!!!
     for biny, ciny, diny, winy, pixy, dixy, boxy in subchannel:
@@ -1254,12 +1254,12 @@ def playlists_m3u(params):  # Biblioteca online
 
 
 
-    plugintools.log("[JavierTV-0.3.0].playlists_m3u "+repr(params))
+    plugintools.log("[PalcoTV-0.3.0].playlists_m3u "+repr(params))
 
     
         
 def getfile_http(params):  # Descarga de lista M3U + llamada a simpletv_items para que liste los items
-    plugintools.log("[JavierTV-0.3.0].getfile_http "+repr(params))
+    plugintools.log("[PalcoTV-0.3.0].getfile_http "+repr(params))
     url = params.get("url")
     params["ext"] = "m3u"
     getfile_url(params)
@@ -1280,7 +1280,7 @@ def parse_url(url):
         
                     
 def getfile_url(params):
-    plugintools.log("[JavierTV-0.3.0].getfile_url " +repr(params))
+    plugintools.log("[PalcoTV-0.3.0].getfile_url " +repr(params))
     ext = params.get("ext")
     title = params.get("title")
 
@@ -1335,7 +1335,7 @@ def getfile_url(params):
 
 
 def header_xml(params):
-    plugintools.log("[JavierTV-0.3.0].header_xml "+repr(params))
+    plugintools.log("[PalcoTV-0.3.0].header_xml "+repr(params))
 
     url = params.get("url")
     params.get("title")
@@ -1364,7 +1364,7 @@ def header_xml(params):
 
 
 def search_channel(params):
-    plugintools.log("[JavierTV-0.3.0].search " + repr(params))
+    plugintools.log("[PalcoTV-0.3.0].search " + repr(params))
 
     buscar = params.get("plot")
     # plugintools.log("buscar texto: "+buscar)
@@ -1692,7 +1692,7 @@ def search_channel(params):
 
 
 def agendatv(params):
-    plugintools.log("[JavierTV-0.3.0].agendatv "+repr(params))
+    plugintools.log("[PalcoTV-0.3.0].agendatv "+repr(params))
 
     hora_partidos = []
     lista_equipos=[]
@@ -2724,7 +2724,7 @@ def futbolenlatv(params):
          
 
 def encode_string(txt):
-    plugintools.log("[JavierTV-0.3.0].encode_string: "+txt)
+    plugintools.log("[PalcoTV-0.3.0].encode_string: "+txt)
     
     txt = txt.replace("&#231;", "ç")
     txt = txt.replace('&#233;', 'é')
@@ -2744,7 +2744,7 @@ def encode_string(txt):
 
 
 def splive_items(params):
-    plugintools.log("[JavierTV-0.3.0].SPlive_items "+repr(params))
+    plugintools.log("[PalcoTV-0.3.0].SPlive_items "+repr(params))
     data = plugintools.read( params.get("url") )
 
     channel = plugintools.find_multiple_matches(data,'<channel>(.*?)</channel>')
@@ -2815,7 +2815,7 @@ def get_fecha():
 
 
 def p2p_items(params):
-    plugintools.log("[JavierTV-0.3.0].p2p_items" +repr(params))
+    plugintools.log("[PalcoTV-0.3.0].p2p_items" +repr(params))
     
     # Vamos a localizar el título 
     title = params.get("plot")
@@ -2975,7 +2975,7 @@ def p2p_items(params):
 
 
 def contextMenu(params):
-    plugintools.log("[JavierTV-0.3.0].contextMenu " +repr(params))
+    plugintools.log("[PalcoTV-0.3.0].contextMenu " +repr(params))
 
     dialog = xbmcgui.Dialog()
     plot = params.get("plot")
@@ -3118,7 +3118,7 @@ def contextMenu(params):
 
 
 def magnet_items(params):
-    plugintools.log("[JavierTV-0.3.0].magnet_items" +repr(params))
+    plugintools.log("[PalcoTV-0.3.0].magnet_items" +repr(params))
     
     plot = params.get("plot")
     
@@ -3174,7 +3174,7 @@ def magnet_items(params):
             
 
 def parse_channel(txt):
-    plugintools.log("[JavierTV-0.3.0].encode_string: "+txt)
+    plugintools.log("[PalcoTV-0.3.0].encode_string: "+txt)
 
     txt = txt.rstrip()
     txt = txt.lstrip() 
@@ -3182,7 +3182,7 @@ def parse_channel(txt):
 
 
 def futbolenlatv_manana(params):
-    plugintools.log("[JavierTV-0.3.0].futbolenlatv " + repr(params))
+    plugintools.log("[PalcoTV-0.3.0].futbolenlatv " + repr(params))
     
     # Fecha de mañana
     import datetime
@@ -3232,7 +3232,7 @@ def futbolenlatv_manana(params):
 
 
 def parser_title(title):
-    plugintools.log("[JavierTV-0.3.0].parser_title " + title)
+    plugintools.log("[PalcoTV-0.3.0].parser_title " + title)
 
     cyd = title
 
@@ -3287,7 +3287,7 @@ def parser_title(title):
 
 
 def json_items(params):
-    plugintools.log("[JavierTV-0.3.0].json_items "+repr(params))
+    plugintools.log("[PalcoTV-0.3.0].json_items "+repr(params))
     data = plugintools.read(params.get("url"))
 
     # Título y autor de la lista
@@ -3439,7 +3439,7 @@ def json_items(params):
 
 
 def youtube_playlists(params):
-    plugintools.log("[JavierTV-0.3.0].youtube_playlists "+repr(params))
+    plugintools.log("[PalcoTV-0.3.0].youtube_playlists "+repr(params))
     
     data = plugintools.read( params.get("url") )
         
@@ -3462,7 +3462,7 @@ def youtube_playlists(params):
 
 # Muestra todos los vídeos del playlist de Youtube
 def youtube_videos(params):
-    plugintools.log("[Javier-0.3.0].youtube_videos "+repr(params))
+    plugintools.log("[PalcoTV-0.3.0].youtube_videos "+repr(params))
     
     # Fetch video list from YouTube feed
     data = plugintools.read( params.get("url") )
@@ -3490,7 +3490,7 @@ def youtube_videos(params):
 
 
 def server_rtmp(params):
-    plugintools.log("[JavierTV-0.3.0].server_rtmp " + repr(params))
+    plugintools.log("[PalcoTV-0.3.0].server_rtmp " + repr(params))
 
     url = params.get("url")
     plugintools.log("URL= "+url)
@@ -3652,7 +3652,7 @@ def server_rtmp(params):
         return params
 
 def launch_rtmp(params):
-    plugintools.log("[JavierTV-0.3.0].launch_rtmp " + repr(params))
+    plugintools.log("[PalcoTV-0.3.0].launch_rtmp " + repr(params))
 
     url = params.get("url")
     plugintools.log("URL= "+url)
@@ -3826,7 +3826,7 @@ def launch_rtmp(params):
   
 
 def peliseries(params):
-    plugintools.log("[JavierTV-0.3.0].peliseries " +repr(params))
+    plugintools.log("[PalcoTV-0.3.0].peliseries " +repr(params))
 
     # Abrimos archivo remoto
     url = params.get("url")
@@ -3919,7 +3919,7 @@ def peliseries(params):
     
 
 def tinyurl(params):
-    plugintools.log("[JavierTV-0.3.0].tinyurl "+repr(params))
+    plugintools.log("[PalcoTV-0.3.0].tinyurl "+repr(params))
 
     url = params.get("url")
     url_getlink = 'http://www.getlinkinfo.com/info?link=' +url
@@ -3932,7 +3932,7 @@ def tinyurl(params):
     plugintools.log("data= "+body)
 
     r = plugintools.find_multiple_matches(body, '<dt class="link-effective-url">Effective URL</dt>(.*?)</a></dd>')
-    xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % ('JavierTV', "Redireccionando enlace...", 3 , art+'icon.png'))
+    xbmc.executebuiltin("Notification(%s,%s,%i,%s)" % ('PalcoTV', "Redireccionando enlace...", 3 , art+'icon.png'))
     
     for entry in r:
         entry = entry.replace("<dd><a href=", "")
@@ -3949,7 +3949,7 @@ def tinyurl(params):
 
 # Conexión con el servicio longURL.org para obtener URL original      
 def longurl(params):
-    plugintools.log("[JavierTV-0.3.0].longURL "+repr(params))
+    plugintools.log("[PalcoTV-0.3.0].longURL "+repr(params))
 
     url = params.get("url")
     url_getlink = 'http://api.longurl.org/v2/expand?url=' +url
@@ -3985,7 +3985,7 @@ def opentxt(self):
      
 
 def arenavision_parser(params):
-    plugintools.log("[JavierTV-0.3.0].arenavision_parser "+repr(params))
+    plugintools.log("[PalcoTV-0.3.0].arenavision_parser "+repr(params))
     
     url = params.get("url")
     thumbnail = params.get("thumbnail")
@@ -4003,7 +4003,7 @@ def arenavision_parser(params):
 
 
 def parse_av_channel(title, url, params):
-    plugintools.log("[JavierTV-0.3.0].parse_av_channel "+repr(params))
+    plugintools.log("[PalcoTV-0.3.0].parse_av_channel "+repr(params))
     
     data = plugintools.read(url)
     fanart = params.get("fanart")
@@ -4024,7 +4024,7 @@ def encode_url(url):
 
 
 def seriecatcher(params):
-    plugintools.log("[JavierTV-0.3.0].seriecatcher "+repr(params))
+    plugintools.log("[PalcoTV-0.3.0].seriecatcher "+repr(params))
     
     url = params.get("url")
     fanart = params.get("extra")
@@ -4034,7 +4034,7 @@ def seriecatcher(params):
 
 
 def GetSerieChapters(params):
-    plugintools.log("[JavierTV-0.3.0].GetSerieChapters "+repr(params))
+    plugintools.log("[PalcoTV-0.3.0].GetSerieChapters "+repr(params))
 
     season = params.get("season")
     data = plugintools.read(params.get("url"))
@@ -4059,7 +4059,7 @@ def GetSerieChapters(params):
         
     
 def GetSerieLinks(fanart , url_cap_fixed, i, title_fixed):
-    plugintools.log("[JavierTV-0.3.0].GetSerieLinks")
+    plugintools.log("[PalcoTV-0.3.0].GetSerieLinks")
     
     data = plugintools.read(url_cap_fixed)
     amv = plugintools.find_multiple_matches(data, 'allmyvideos.net/(.*?)"')
@@ -4087,41 +4087,41 @@ def GetSerieLinks(fanart , url_cap_fixed, i, title_fixed):
         
 
 def SelectTemp(params, temp):
-    plugintools.log("[JavierTV-0.3.0].SelectTemp "+repr(params))
+    plugintools.log("[PalcoTV-0.3.0].SelectTemp "+repr(params))
 
     seasons = len(temp)
     
     dialog = xbmcgui.Dialog()
     
     if seasons == 1:
-        selector = dialog.select('JavierTV', [temp[0]])
+        selector = dialog.select('PalcoTV', [temp[0]])
                                              
     if seasons == 2:
-        selector = dialog.select(Javier'TV', [temp[0], temp[1]])
+        selector = dialog.select('PalcoTV', [temp[0], temp[1]])
                                              
     if seasons == 3:
-        selector = dialog.select('JavierTV', [temp[0],temp[1], temp[2]])
+        selector = dialog.select('PalcoTV', [temp[0],temp[1], temp[2]])
                                              
     if seasons == 4:
-        selector = dialog.select('JavierTV', [temp[0], temp[1],temp[2], temp[3]])
+        selector = dialog.select('PalcoTV', [temp[0], temp[1],temp[2], temp[3]])
                                              
     if seasons == 5:
-        selector = dialog.select('JavierTV', [temp[0], temp[1],temp[2], temp[3], temp[4]])
+        selector = dialog.select('PalcoTV', [temp[0], temp[1],temp[2], temp[3], temp[4]])
         
     if seasons == 6:
-        selector = dialog.select('JavierTV', [temp[0], temp[1],temp[2], temp[3], temp[4], temp[5]])
+        selector = dialog.select('PalcoTV', [temp[0], temp[1],temp[2], temp[3], temp[4], temp[5]])
         
     if seasons == 7:
-        selector = dialog.select('JavierTV', [temp[0], temp[1],temp[2], temp[3], temp[4], temp[5], temp[6]])
+        selector = dialog.select('PalcoTV', [temp[0], temp[1],temp[2], temp[3], temp[4], temp[5], temp[6]])
         
     if seasons == 8:
-        selector = dialog.select('JavierTV', [temp[0], temp[1],temp[2], temp[3], temp[4], temp[5], temp[6], temp[7]])
+        selector = dialog.select('PalcoTV', [temp[0], temp[1],temp[2], temp[3], temp[4], temp[5], temp[6], temp[7]])
         
     if seasons == 9:
-        selector = dialog.select('JavierTV', [temp[0], temp[1],temp[2], temp[3], temp[4], temp[5], temp[6], temp[7], temp[8]])
+        selector = dialog.select('PalcoTV', [temp[0], temp[1],temp[2], temp[3], temp[4], temp[5], temp[6], temp[7], temp[8]])
         
     if seasons == 10:
-        selector = dialog.select(Javier'TV', [temp[0], temp[1],temp[2], temp[3], temp[4], temp[5], temp[6], temp[7], temp[8], temp[9]])                               
+        selector = dialog.select('PalcoTV', [temp[0], temp[1],temp[2], temp[3], temp[4], temp[5], temp[6], temp[7], temp[8], temp[9]])                               
 
     i = 0
     while i<= seasons :
@@ -4135,7 +4135,7 @@ def SelectTemp(params, temp):
             
 
 def m3u_items(title):
-    plugintools.log("[JavierTV-0.3.0].m3u_items= "+title)
+    plugintools.log("[PalcoTV-0.3.0].m3u_items= "+title)
 
     thumbnail = art + 'icon.png'
     fanart = art + 'fanart.jpg'
@@ -4204,7 +4204,7 @@ def m3u_items(title):
 
 
 def xml_skin():
-    plugintools.log("[JavierTV-0.3.0].xml_skin")
+    plugintools.log("[PalcoTV-0.3.0].xml_skin")
 
     mastermenu = plugintools.get_setting("mastermenu")
     xmlmaster = plugintools.get_setting("xmlmaster")
@@ -4214,15 +4214,15 @@ def xml_skin():
     if xmlmaster == 'true':
         if SelectXMLmenu == '0':
             mastermenu = 'http://pastebin.com/raw.php?i=bjCUnJjG'
-            plugintools.log("[Javier.xml_skin: "+SelectXMLmenu)
-            # Control para ver la intro de JavierTV
+            plugintools.log("[PalcoTV.xml_skin: "+SelectXMLmenu)
+            # Control para ver la intro de PalcoTV
             ver_intro = plugintools.get_setting("ver_intro")
             if ver_intro == "true":
                 xbmc.Player(xbmc.PLAYER_CORE_AUTO).play(art + 'intro.mp4')
                 
         elif SelectXMLmenu == '1':
             mastermenu = 'http://pastebin.com/raw.php?i=66NLtw7d'
-            plugintools.log("[JavierTV.xml_skin: "+SelectXMLmenu)
+            plugintools.log("[PalcoTV.xml_skin: "+SelectXMLmenu)
             # Control para ver la intro de Reig
             ver_intro = plugintools.get_setting("ver_intro")
             if ver_intro == "true":
@@ -4230,11 +4230,11 @@ def xml_skin():
             
         elif SelectXMLmenu == '2':
             mastermenu = 'http://pastebin.com/raw.php?i=4TB6uNPW'
-            plugintools.log("[JavierTV.xml_skin: "+SelectXMLmenu)
+            plugintools.log("[PalcoTV.xml_skin: "+SelectXMLmenu)
 
         elif SelectXMLmenu == '3':
             mastermenu = 'http://pastebin.com/raw.php?i=82NdnQnB'
-            plugintools.log("[JavierTV.xml_skin: "+SelectXMLmenu)
+            plugintools.log("[PalcoTV.xml_skin: "+SelectXMLmenu)
             # Control para ver la intro de Sebas
             ver_intro = plugintools.get_setting("ver_intro")
             if ver_intro == "true":
@@ -4244,16 +4244,16 @@ def xml_skin():
             # Pastebin
             id_pastebin = plugintools.get_setting("id_pastebin")
             if id_pastebin == "":
-                plugintools.log("[JavierTV.xml_skin: No definido")                
+                plugintools.log("[PalcoTV.xml_skin: No definido")                
                 mastermenu = 'http://pastebin.com/raw.php?i=bjCUnJjG'
             else:                
                 mastermenu = 'http://pastebin.com/raw.php?i=' +id_pastebin
-                plugintools.log("[Javier.xml_skin: "+mastermenu)
+                plugintools.log("[PalcoTV.xml_skin: "+mastermenu)
         elif SelectXMLmenu == '5':   # Skin personalizado
             if mastermenu == "":
-                plugintools.log("[Javier.xml_skin: No definido")
+                plugintools.log("[PalcoTV.xml_skin: No definido")
                 mastermenu = 'http://pastebin.com/raw.php?i=bjCUnJjG'                
-                # Control para ver la intro de JavierTV
+                # Control para ver la intro de PalcoTV
                 ver_intro = plugintools.get_setting("ver_intro")
                 if ver_intro == "true":
                     xbmc.Player(xbmc.PLAYER_CORE_AUTO).play(art + 'intro.mp4')                
@@ -4265,7 +4265,7 @@ def xml_skin():
         # xmlmaster = False (no activado), menú por defecto     
         mastermenu = 'http://pastebin.com/raw.php?i=bjCUnJjG'
 
-        # Control para ver la intro deJavier TV
+        # Control para ver la intro de PalcoTV
         ver_intro = plugintools.get_setting("ver_intro")
         if ver_intro == "true":
             xbmc.Player(xbmc.PLAYER_CORE_AUTO).play(art + 'intro.mp4')
